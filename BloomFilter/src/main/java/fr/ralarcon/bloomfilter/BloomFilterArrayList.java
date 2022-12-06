@@ -5,12 +5,22 @@
 
 package fr.ralarcon.bloomfilter;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 /**
  *
  * @author ralarcon
  */
 public class BloomFilterArrayList extends BloomFilter {
-    
-    
+
+    public ArrayList<Boolean> bitsArray;
+    public BloomFilterArrayList(int size, int hashNumber) {
+        super(size, hashNumber);
+        bitsArray = new ArrayList<>(m);
+        Collections.fill(bitsArray, false);
+
+        displayResult();
+    }
     
 }

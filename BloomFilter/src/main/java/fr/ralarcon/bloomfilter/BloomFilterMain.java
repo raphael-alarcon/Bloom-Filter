@@ -20,6 +20,11 @@ public class BloomFilterMain {
     public static void main(String[] args) {
         
         // Fill the array of booleans with False
-        BloomFilter filter = new BloomFilterArray(500, 3);
+        BloomFilter filterArray = new BloomFilterArray(500, 3);
+        filterArray = new BloomFilterArrayList(500, 3);
+        filterArray = new BloomFilterLinkedList(500, 3);
+
+        BloomFilterBenchmark benchmark = new BloomFilterBenchmark(500, 3, 1000);
+        benchmark.run();
     }
 }

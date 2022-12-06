@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Bloom-Filter.iml" filepath="$PROJECT_DIR$/.idea/Bloom-Filter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BloomFilter/BloomFilter.iml" filepath="$PROJECT_DIR$/BloomFilter/BloomFilter.iml" />
+    </modules>
+  </component>
+</project>

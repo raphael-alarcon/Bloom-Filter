@@ -5,23 +5,24 @@
 
 package fr.ralarcon.bloomfilter;
 
-import fr.ralarcon.utils.Colors;
-
-import java.util.Arrays;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
 
 /**
  *
  * @author ralarcon
  */
-public class BloomFilterArray extends BloomFilter {
+public class BloomFilterLinkedList extends BloomFilter {
+
+    public LinkedList<Boolean> bitsArray;
     
-    public BloomFilterArray(int size, int hashNumber) {
+    public BloomFilterLinkedList(int size, int hashNumber) {
         super(size, hashNumber);
-        bitsArray = new boolean[this.m];
-        Arrays.fill(bitsArray, false);
-        
+        bitsArray = new LinkedList<>();
+        Collections.fill(bitsArray, false);
+
         displayResult();
     }
+    
 }

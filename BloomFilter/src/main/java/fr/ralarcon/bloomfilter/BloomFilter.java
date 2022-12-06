@@ -17,18 +17,19 @@ public abstract class BloomFilter {
     
     public int k;
     
-    public boolean[] boolArray;
+    public boolean[] bitsArray;
     
-    int[] valuesArray = initArrayOfValues(20, 200, k);
+    int[] valuesArray;
     
-    public Random rdm = new Random();
+    public static Random rdm = new Random();
     
     int researchedValue = 154;
     
     public BloomFilter(int size, int hashNumber) {
         this.m = size;
         this.k = hashNumber;
-        boolArray = new boolean[m];
+        bitsArray = new boolean[m];
+        valuesArray = initArrayOfValues(20, 200, k);
     }
     
     public int[] initArrayOfValues(int size, int bound, int k) {
@@ -46,26 +47,24 @@ public abstract class BloomFilter {
 
     public void hashValue(int k, int x) {
         for (int i = 1; i <= k; i++) {
-            boolArray[hash(x, i)] = true;
+            bitsArray[hash(x, i)] = true;
         }
     }
-    
-    public boolean research(int x, int k) {
-        boolean found = false;
+
+    public boolean research(int x) {
         for (int i = 1; i <= k; i++) {
-            if (boolArray[hash(x, i)]) {
-                found = true;
-            }
+            if (!bitsArray[hash(x, i)])return false;
         }
-        return found;
+        return true;
     }
-    
+
     public void displayResult() {
         System.out.println(Colors.YELLOW_BOLD+"---------------------------------------");
-        System.out.println("DEBUG");
+        System.out.println("\nDEBUG " + Colors.RESET + getClass().getName().toString()+"\n");
+
         System.out.println(Arrays.toString(valuesArray));
-        System.out.println(Arrays.toString(boolArray));
-        
-        System.out.println((research(researchedValue, k) ? "Element " +researchedValue+" trouvé" : "Element "+researchedValue+" non trouvé"));
+        System.out.println(Arrays.toString(bitsArray));
+        System.out.println((research(researchedValue) ? "Element " +researchedValue+" trouvé" : "Element "+researchedValue+" non trouvé"));
+        System.out.println(Colors.YELLOW_BOLD+"---------------------------------------"+ Colors.RESET);
     }
 }

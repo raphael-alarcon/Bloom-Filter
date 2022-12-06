@@ -1,0 +1,5 @@
+fr\ralarcon\utils\Colors.class
+fr\ralarcon\bloomfilter\BloomFilterArrayList.class
+fr\ralarcon\bloomfilter\BloomFilterMain.class
+fr\ralarcon\bloomfilter\BloomFilter.class
+fr\ralarcon\bloomfilter\BloomFilterArray.class
