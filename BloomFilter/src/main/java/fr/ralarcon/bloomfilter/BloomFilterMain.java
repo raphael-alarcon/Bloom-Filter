@@ -21,7 +21,7 @@ public class BloomFilterMain {
         filterArray = new BloomFilterArrayList(500, 3);
         filterArray = new BloomFilterLinkedList(500, 3);
 
-        BloomFilterBenchmark benchmark = new BloomFilterBenchmark(10000, 3, 1000);
+        BloomFilterBenchmark benchmark = new BloomFilterBenchmark(300, 3, 1000000);
         benchmark.run();
     }
 }

@@ -85,7 +85,7 @@ public class BloomFilterBenchmark {
                 filter.valuesArray = filter.initArrayOfValues((int)(filter.m*nValues[j]), bound, kValues[i]);
                 line+=String.format("%5s|", StringUtils.center(falsePositiveRatio(researchedValues, filter)+"%", 5));
             }
-            System.out.println("-----+-----+-----+-----");
+            System.out.println("-----+-----+-----+-----+");
             System.out.println(line);
             line="";
         }
@@ -100,13 +100,13 @@ public class BloomFilterBenchmark {
         System.out.println(Colors.YELLOW_BOLD+"---------------------------------------"+ Colors.RESET);
     }
     
-    public int falsePositiveRatio(int[] researchValues, BloomFilter filter) {
-        int result = 0;
+    public double falsePositiveRatio(int[] researchValues, BloomFilter filter) {
+        double result = 0;
         for (int i = 0;i<researchValues.length;i++) {
             if (filter.research(researchValues[i]) && !Arrays.asList(filter.valuesArray).contains(researchValues[i])) {
                 result++;
             }
         }
-        return result;
+        return result/researchValues.length;
     }
 }
