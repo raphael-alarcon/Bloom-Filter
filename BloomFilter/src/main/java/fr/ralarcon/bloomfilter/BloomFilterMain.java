@@ -4,9 +4,6 @@
  */
 package fr.ralarcon.bloomfilter;
 
-import fr.ralarcon.utils.Colors;
-import java.util.Arrays;
-import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -24,7 +21,7 @@ public class BloomFilterMain {
         filterArray = new BloomFilterArrayList(500, 3);
         filterArray = new BloomFilterLinkedList(500, 3);
 
-        BloomFilterBenchmark benchmark = new BloomFilterBenchmark(500, 3, 1000);
+        BloomFilterBenchmark benchmark = new BloomFilterBenchmark(10000, 3, 1000);
         benchmark.run();
     }
 }

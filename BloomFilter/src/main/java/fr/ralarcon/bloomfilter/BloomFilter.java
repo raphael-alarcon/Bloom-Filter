@@ -29,7 +29,7 @@ public abstract class BloomFilter {
         this.m = size;
         this.k = hashNumber;
         bitsArray = new boolean[m];
-        valuesArray = initArrayOfValues(20, 200, k);
+        valuesArray = initArrayOfValues((int)(m*0.1), 200, k);
     }
     
     public int[] initArrayOfValues(int size, int bound, int k) {
@@ -41,8 +41,8 @@ public abstract class BloomFilter {
         return res;
     }
     
-    public int hash(int x, int i) {
-        return x * i % m;
+    public int hash(Object x, int i) {
+        return x.hashCode() * i * 31 % m;
     }
 
     public void hashValue(int k, int x) {

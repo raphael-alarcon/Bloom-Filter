@@ -5,11 +5,7 @@
 
 package fr.ralarcon.bloomfilter;
 
-import fr.ralarcon.utils.Colors;
-
 import java.util.Arrays;
-import java.util.Random;
-import java.util.Scanner;
 
 /**
  *
