@@ -1,20 +1,37 @@
 # Rapport d'implémentation d'un Filtre de Bloom
 
-### Filtre de Bloom
+## Sommaire
+- [Description](#filtre-de-bloom)
+
+<br>
+
+## Filtre de Bloom
 
 <i>« Un filtre de Bloom est une structure de données permettant de façon efficace de tester la présence
-ou non d’un élément dans le filtre. En particulier, le filtre de Bloom permet de tester :\
+ou non d’un élément dans le filtre. En particulier, le filtre de Bloom permet de tester :
 -  avec certitude : l'absence d'un élément (si le test indique que le filtre ne contient pas une
 valeur, alors il ne la contient pas)
 -  avec une certaine probabilité : la présence d'un élément (si le test indique que le filtre
-contient une valeur, il peut se tromper avec une certaine probabilité)\
+contient une valeur, il peut se tromper avec une certaine probabilité)
 
 Un filtre de Bloom est constitué d’un tableau de bits (ou de booléens) de m cases et de k fonctions
 de hachage. Chacune de ses k fonctions de hachage associe, à chaque élément à stocker, un indice
 dans le tableau (donc entre 0 et m-1). »</i>
 
-## Project Status
-(only necessary if incomplete)
+<br>
+
+## Statut du projet
+### Avancement 
+
+#### Implémentation des différentes variantes du filtre en utilisant trois types de structure de données
+- [x] Simple tableau (<code>int[]</code>)
+- [x] ArrayList
+- [x] LinkedList
+
+### Statut global
+
+![](https://geps.dev/progress/10)
+
 
 #### Example:
 
