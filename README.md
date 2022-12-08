@@ -2,6 +2,9 @@
 
 ## Sommaire
 - [Description](#filtre-de-bloom)
+- [Statut du projet](#statut-du-projet)
+- [Implémentation](#implmentation)
+- [Benchmark]()
 
 <br>
 
@@ -39,48 +42,43 @@ dans le tableau (donc entre 0 et m-1). »</i>
 - [ ] Dernières vérifications
 
 ### Statut global
-![](https://geps.dev/progress/60)
+![](https://geps.dev/progress/80)
 
-## Project Screen Shot(s)
+## Implémentation
 
-#### Example:   
+### Structure du code Java (diagramme de classes UML)
+![](/resources/Bloom-Filter.png)
 
-[ PRETEND SCREEN SHOT IS HERE ]
 
-[ PRETEND OTHER SCREEN SHOT IS HERE ]
+## Benchmark
 
-## Installation and Setup Instructions
+Afin d'obtenir des résultats exploitables et précis, j'ai choisi de mettre l'accent sur la visualisation des données résultant du benchmarking.
+Le but final étant d'effectuer une comparaison des temps d'exécution entre les trois structures de données implémentées (ArrayList, simple "tableau", LinkedList).
 
-#### Example:  
+### Temps d'exécution
 
-Clone down this repository. You will need `node` and `npm` installed globally on your machine.  
+Ici, on compare les temps d'exécution d'un nombre fixé de recherches (valeur aléatoire) dans le filtre pour chacune trois structures de données *(On négligera pour le moment les résultats de ces recherches)*.
 
-Installation:
+<img src="/resources/Comparaison%20tps%20d'éxec..png">
 
-`npm install`  
+### Taux de faux positif
 
-To Run Test Suite:  
+Le taux de faux positif correspond au nombre de fois où une valeur non présente dans le filtre (qui n'a pas été ajoutée) est retournée présente. 
 
-`npm test`  
+<hr>
 
-To Start Server:
+#### Exemple :
 
-`npm start`  
+On ajoute tour à tour les entiers de la liste [1, 3, 4] dans un filtre de taille *m* = 300. On cherche à tester si l'entier 13 est présent dans le filtre. La fonction de recherche nous stipule que cette valeur est présente alors qu'elle ne l'est pas, il s'agit donc d'un faux positif.
 
-To Visit App:
+<hr>
 
-`localhost:3000/ideas`  
+Ici, on cherchera donc à tester le ratio de faux positif dans un filtre de taille fixée, mais avec des valeurs de *n* (0.01, 0.05, 0.1) et de *k* (1, 3, 5) différentes.
 
-## Reflection
+- *n* ⇨ Nombre de valeurs ajoutées au filtre (en fonction de *m*, si *m* = 500 et *n* = 0.1, 500 x 0.1 = 50)
+- *k* ⇨ Nombre de fonctions de hash
 
-  - What was the context for this project? (ie: was this a side project? was this for Turing? was this for an experiment?)
-  - What did you set out to build?
-  - Why was this project challenging and therefore a really good learning experience?
-  - What were some unexpected obstacles?
-  - What tools did you use to implement this project?
-      - This might seem obvious because you are IN this codebase, but to all other humans now is the time to talk about why you chose webpack instead of create react app, or D3, or vanilla JS instead of a framework etc. Brag about your choices and justify them here.  
-
-#### Example:  
+## Conclusion 
 
 This was a 3 week long project built during my third module at Turing School of Software and Design. Project goals included using technologies learned up until this point and familiarizing myself with documentation for new features.  
 

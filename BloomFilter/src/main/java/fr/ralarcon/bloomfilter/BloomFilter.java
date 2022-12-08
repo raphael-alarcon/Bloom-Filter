@@ -44,11 +44,10 @@ public abstract class BloomFilter {
     public boolean research(int x) {
         return false;
     }
-        
 
     public void displayResult() {
-        System.out.println(Colors.YELLOW_BOLD+"\n―――――――――――――――――――――――――――――――――――――――――――――――――――");
-        System.out.println("\nDEBUG " + Colors.RESET + getClass().getName()+"\n");
+        Colors.printSeparator();
+        System.out.println(Colors.YELLOW_BOLD+"\nDEBUG " + Colors.RESET + getClass().getName()+"\n");
         System.out.println(Arrays.toString(valuesArray));
     }
 }

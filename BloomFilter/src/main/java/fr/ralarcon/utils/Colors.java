@@ -80,5 +80,11 @@ public abstract class Colors {
     public static final String BLUE_BACKGROUND_BRIGHT = "\033[0;104m";// BLUE
     public static final String PURPLE_BACKGROUND_BRIGHT = "\033[0;105m"; // PURPLE
     public static final String CYAN_BACKGROUND_BRIGHT = "\033[0;106m";  // CYAN
-    public static final String WHITE_BACKGROUND_BRIGHT = "\033[0;107m";   // WHITE
+    public static final String WHITE_BACKGROUND_BRIGHT = "\033[0;107m";
+    // WHITE
+    public static final String CROSSED_TEXT = "\033[9m";  // CROSSED
+
+    public static void printSeparator() {
+       System.out.println(Colors.CROSSED_TEXT+"                                                        "+Colors.RESET);
+    }
 }

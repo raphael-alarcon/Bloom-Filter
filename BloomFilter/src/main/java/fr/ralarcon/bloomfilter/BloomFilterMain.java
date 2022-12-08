@@ -4,6 +4,8 @@
  */
 package fr.ralarcon.bloomfilter;
 
+import fr.ralarcon.utils.Colors;
+
 import java.util.Scanner;
 
 /**
@@ -21,7 +23,7 @@ public class BloomFilterMain {
     }
     
     public static void menu() {
-        System.out.println("\n―――――――――――――――――――――――――――――――――――――――――――――――――――");
+        Colors.printSeparator();
         System.out.println("\nBloom Filter implementation by ALARCON Raphaël\n");
         System.out.println("[1] Run filter with simple array implementation (random values, m = 300, k = 3)");
         System.out.println("[2] Run filter with ArrayList implementation");
@@ -29,12 +31,18 @@ public class BloomFilterMain {
         System.out.println("[4] Run benchmark on all three types of data structures ("+BloomFilterBenchmark.NB_SIMULATIONS+" simulations)");
         System.out.println("[5] Run detailled benchmark on a data structure");
         System.out.println("[6] Exit.");
-        int answer = Integer.parseInt(scanner.nextLine());
-        if (!(answer >= 0 && answer <=6)) {
+        int answer;
+        try {
+            answer = Integer.parseInt(scanner.nextLine());
+            if (!(answer >= 0 && answer <=6)) {
+                menu();
+                return;
+            }
+            runChoice(answer);
+        } catch (NumberFormatException e) {
+            System.out.println(Colors.RED_BOLD+"Error: "+ Colors.RESET+"Not a number, please enter a valid number from (1 - 6).");
             menu();
-            return;
         }
-        runChoice(answer);
     }
     
     public static void runChoice(int answer) {
@@ -58,15 +66,19 @@ public class BloomFilterMain {
             case 5:
                 System.out.println("Enter the type of structure you want to use (\"LinkedList\", \"SimpleArray\" or \"ArrayList\"):");
                 String choice = scanner.nextLine();
-                if (choice.equals("LinkedList")) {
-                    filter = benchmark.linkedListFilter;
-                } else if (choice.equals("ArrayList")) {
-                    filter = benchmark.arrayListFilter;
-                } else if (choice.equals("SimpleArray")) {
-                    filter = benchmark.arrayFilter;
-                } else {
-                    runChoice(answer);
-                    return;
+                switch (choice) {
+                    case "LinkedList":
+                        filter = benchmark.linkedListFilter;
+                        break;
+                    case "ArrayList":
+                        filter = benchmark.arrayListFilter;
+                        break;
+                    case "SimpleArray":
+                        filter = benchmark.arrayFilter;
+                        break;
+                    default:
+                        runChoice(answer);
+                        return;
                 }
                 benchmark.displayBenchmark(filter);
                 break;

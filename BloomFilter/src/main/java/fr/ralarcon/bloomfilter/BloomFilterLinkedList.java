@@ -54,6 +54,6 @@ public class BloomFilterLinkedList extends BloomFilter {
     public void displayResult() {
         super.displayResult();
         System.out.println(bitsArray.toString());
-        System.out.println((research(researchedValue) ? "Element " +researchedValue+" trouvé" : "Element "+researchedValue+" non trouvé")+ Colors.RESET);
+        System.out.println((research(researchedValue) ? "Element " + Colors.GREEN_BOLD + researchedValue + Colors.RESET + " trouvé" : "Element " + Colors.RED_BOLD + researchedValue + Colors.RESET+" non trouvé"));
     }
 }

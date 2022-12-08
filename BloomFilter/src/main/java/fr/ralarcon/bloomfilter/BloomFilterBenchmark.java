@@ -10,17 +10,13 @@ public class BloomFilterBenchmark {
     public BloomFilterArrayList arrayListFilter;
     public BloomFilterLinkedList linkedListFilter;
 
-    private int bound;
-    
+    private final int bound;
     public static int NB_SIMULATIONS = 10000000;
-    
-    private int numberOfValues;
 
     public BloomFilterBenchmark(int m, int k, int bound) {
         arrayFilter = new BloomFilterArray(m, k);
         arrayListFilter = new BloomFilterArrayList(m, k);
         linkedListFilter = new BloomFilterLinkedList(m, k);
-        numberOfValues = (int)(m*0.01);
         this.bound = bound;
         
     }
@@ -29,8 +25,8 @@ public class BloomFilterBenchmark {
         long startTime, endTime;
         Random random = new Random();
 
-        System.out.println("―――――――――――――――――――――――――――――――――――――――――――――――――――");
-        System.out.println("\nFULL BENCHMARK\n");
+        Colors.printSeparator();
+        System.out.println(Colors.YELLOW_BOLD+"\nFULL BENCHMARK\n"+Colors.RESET);
         System.out.println("Properties:");
         System.out.println("    - m = "+this.arrayFilter.m + " (Size of the filter)");
         System.out.println("    - k = "+this.arrayFilter.k + " (Number of hash functions)");
@@ -85,27 +81,26 @@ public class BloomFilterBenchmark {
         int[] kValues = {1,3,5};
         
         startTotalTime = System.currentTimeMillis();
-        System.out.println(Colors.YELLOW_BOLD+"\n―――――――――――――――――――――――――――――――――――――――――――――――――――");
-        System.out.println("\nBenchmark " + Colors.RESET + filter.getClass().getName()+"\n");
+        Colors.printSeparator();
+        System.out.println(Colors.YELLOW_BOLD+"\nBENCHMARK " + Colors.RESET + filter.getClass().getName()+"\n");
         System.out.println("Result of researching values in the filter :");
         System.out.println("m = " + filter.m+"\n");
-        System.out.println(String.format("%5s│%5s│%5s│%5s│", StringUtils.center("k/n",5), StringUtils.center(""+nValues[0], 5), StringUtils.center(""+nValues[1], 5), StringUtils.center(""+nValues[2], 5)));
-        String line = "";
-        for (int i = 0; i<kValues.length; i++) {
-            line+=String.format("%5s|", StringUtils.center(""+kValues[i], 5));
-            for (int j = 0; j<nValues.length;j++) {
-                filter.valuesArray = filter.initArrayOfValues((int)(filter.m*nValues[j]), bound, kValues[i]);
-                line+=String.format("%5s|", StringUtils.center(falsePositiveRatio(filter)+"%", 5));
+        System.out.printf("%5s|%5s|%5s|%5s|%n", StringUtils.center("k/n",5), StringUtils.center(""+nValues[0], 5), StringUtils.center(""+nValues[1], 5), StringUtils.center(""+nValues[2], 5));
+        StringBuilder line = new StringBuilder();
+        for (int kValue : kValues) {
+            line.append(String.format("%5s|", StringUtils.center("" + kValue, 5)));
+            for (double nValue : nValues) {
+                filter.valuesArray = filter.initArrayOfValues((int) (filter.m * nValue), bound, kValue);
+                line.append(String.format("%5s|", StringUtils.center(falsePositiveRatio(filter) + "%", 5)));
             }
-            System.out.println("―――――┼―――――┼―――――┼―――――┤");
+            System.out.println(Colors.CROSSED_TEXT + "     +     +     +     +" + Colors.RESET);
             System.out.println(line);
-            line="";
+            line = new StringBuilder();
         }
-        System.out.println("―――――┴―――――┴―――――┴―――――┘");
+        System.out.println(Colors.CROSSED_TEXT+"     +     +     +     +"+Colors.RESET);
         endTotalTime = System.currentTimeMillis();
         System.out.println("\nNumber of values: " + filter.m*nValues[0] + ", " + filter.m*nValues[1] + ", " + filter.m*nValues[2]);
         System.out.println("Values: 0 - " + bound);
-        
         System.out.println("Total Time: " + (endTotalTime - startTotalTime) + "ms"+ Colors.RESET);
     }
     
@@ -126,8 +121,8 @@ public class BloomFilterBenchmark {
         }
         
         //
-        for (int i = 0;i<researchedValues.length;i++) {
-            if (filter.research(researchedValues[i])) {
+        for (int researchedValue : researchedValues) {
+            if (filter.research(researchedValue)) {
                 result++;
             }
         }
