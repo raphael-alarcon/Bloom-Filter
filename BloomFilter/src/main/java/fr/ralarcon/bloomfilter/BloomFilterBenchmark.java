@@ -29,7 +29,7 @@ public class BloomFilterBenchmark {
         long startTime, endTime;
         Random random = new Random();
 
-        System.out.println("---------------------------------------------------");
+        System.out.println("―――――――――――――――――――――――――――――――――――――――――――――――――――");
         System.out.println("\nFULL BENCHMARK\n");
         System.out.println("Properties:");
         System.out.println("    - m = "+this.arrayFilter.m + " (Size of the filter)");
@@ -80,48 +80,57 @@ public class BloomFilterBenchmark {
     
     public void displayBenchmark(BloomFilter filter) {
         long startTotalTime, endTotalTime;
-        Random random = new Random();
-        
-        int[] researchedValues = new int[100];
-        for(int i=0;i<researchedValues.length;i++)researchedValues[i]=random.nextInt(bound);
         
         double[] nValues = {0.01,0.05,0.1};
         int[] kValues = {1,3,5};
         
-        System.out.println(Colors.YELLOW_BOLD+"\n---------------------------------------------------");
+        startTotalTime = System.currentTimeMillis();
+        System.out.println(Colors.YELLOW_BOLD+"\n―――――――――――――――――――――――――――――――――――――――――――――――――――");
         System.out.println("\nBenchmark " + Colors.RESET + filter.getClass().getName()+"\n");
         System.out.println("Result of researching values in the filter :");
-        System.out.println("m = " + filter.m);
-        System.out.println("Researching: " + Arrays.toString(researchedValues)+"\n");
-        System.out.println(String.format("%5s|%5s|%5s|%5s|", StringUtils.center("k/n",5), StringUtils.center(""+nValues[0], 5), StringUtils.center(""+nValues[1], 5), StringUtils.center(""+nValues[2], 5)));
+        System.out.println("m = " + filter.m+"\n");
+        System.out.println(String.format("%5s│%5s│%5s│%5s│", StringUtils.center("k/n",5), StringUtils.center(""+nValues[0], 5), StringUtils.center(""+nValues[1], 5), StringUtils.center(""+nValues[2], 5)));
         String line = "";
         for (int i = 0; i<kValues.length; i++) {
             line+=String.format("%5s|", StringUtils.center(""+kValues[i], 5));
             for (int j = 0; j<nValues.length;j++) {
                 filter.valuesArray = filter.initArrayOfValues((int)(filter.m*nValues[j]), bound, kValues[i]);
-                line+=String.format("%5s|", StringUtils.center(falsePositiveRatio(researchedValues, filter)+"%", 5));
+                line+=String.format("%5s|", StringUtils.center(falsePositiveRatio(filter)+"%", 5));
             }
-            System.out.println("-----+-----+-----+-----+");
+            System.out.println("―――――┼―――――┼―――――┼―――――┤");
             System.out.println(line);
             line="";
         }
-        
-        startTotalTime = System.currentTimeMillis();
-        filter.initArrayOfValues(numberOfValues, bound, filter.k);
+        System.out.println("―――――┴―――――┴―――――┴―――――┘");
+        endTotalTime = System.currentTimeMillis();
         System.out.println("\nNumber of values: " + filter.m*nValues[0] + ", " + filter.m*nValues[1] + ", " + filter.m*nValues[2]);
         System.out.println("Values: 0 - " + bound);
         
-        endTotalTime = System.currentTimeMillis();
         System.out.println("Total Time: " + (endTotalTime - startTotalTime) + "ms"+ Colors.RESET);
     }
     
-    public double falsePositiveRatio(int[] researchValues, BloomFilter filter) {
+    public double falsePositiveRatio(BloomFilter filter) {
         double result = 0;
-        for (int i = 0;i<researchValues.length;i++) {
-            if (filter.research(researchValues[i]) && !Arrays.asList(filter.valuesArray).contains(researchValues[i])) {
+        Random random = new Random();
+        int[] researchedValues = new int[100];
+        
+        // Add random values to the list of researched values
+        // (that are not actually in the valuesArray of the filter)
+        // so that we can evaluate the false positive ratio
+        for(int i=0;i<researchedValues.length;i++) {
+            int value = random.nextInt(bound);
+            while (Arrays.asList(filter.valuesArray).contains(value)) {
+                value = random.nextInt(bound);
+            }
+            researchedValues[i]=random.nextInt(value);
+        }
+        
+        //
+        for (int i = 0;i<researchedValues.length;i++) {
+            if (filter.research(researchedValues[i])) {
                 result++;
             }
         }
-        return result/researchValues.length;
+        return result/researchedValues.length;
     }
 }

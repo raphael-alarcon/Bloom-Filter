@@ -59,7 +59,7 @@ public abstract class BloomFilter {
     }
 
     public void displayResult() {
-        System.out.println(Colors.YELLOW_BOLD+"\n---------------------------------------------------");
+        System.out.println(Colors.YELLOW_BOLD+"\n―――――――――――――――――――――――――――――――――――――――――――――――――――");
         System.out.println("\nDEBUG " + Colors.RESET + getClass().getName().toString()+"\n");
 
         System.out.println(Arrays.toString(valuesArray));
