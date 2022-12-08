@@ -59,7 +59,7 @@ Le but final étant d'effectuer une comparaison des temps d'exécution entre les
 
 Ici, on compare les temps d'exécution d'un nombre fixé de recherches (valeur aléatoire) dans le filtre pour chacune trois structures de données *(On négligera pour le moment les résultats de ces recherches)*.
 
-<img src="/resources/Comparaison%20tps%20d'éxec..png">
+![](resources/Comparaison%20tps%20d'éxec..png)
 
 ### Taux de faux positif
 
