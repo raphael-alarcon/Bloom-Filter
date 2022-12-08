@@ -20,8 +20,6 @@ public class BloomFilterLinkedList extends BloomFilter {
         super(size, hashNumber);
         bitsArray = new LinkedList<>();
         Collections.fill(bitsArray, false);
-
-        displayResult();
     }
     
 }

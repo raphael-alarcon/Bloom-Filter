@@ -19,8 +19,6 @@ public class BloomFilterArrayList extends BloomFilter {
         super(size, hashNumber);
         bitsArray = new ArrayList<>(m);
         Collections.fill(bitsArray, false);
-
-        displayResult();
     }
     
 }

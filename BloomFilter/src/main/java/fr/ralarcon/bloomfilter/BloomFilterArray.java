@@ -17,7 +17,5 @@ public class BloomFilterArray extends BloomFilter {
         super(size, hashNumber);
         bitsArray = new boolean[this.m];
         Arrays.fill(bitsArray, false);
-        
-        displayResult();
     }
 }

@@ -59,12 +59,11 @@ public abstract class BloomFilter {
     }
 
     public void displayResult() {
-        System.out.println(Colors.YELLOW_BOLD+"---------------------------------------");
+        System.out.println(Colors.YELLOW_BOLD+"\n---------------------------------------------------");
         System.out.println("\nDEBUG " + Colors.RESET + getClass().getName().toString()+"\n");
 
         System.out.println(Arrays.toString(valuesArray));
         System.out.println(Arrays.toString(bitsArray));
-        System.out.println((research(researchedValue) ? "Element " +researchedValue+" trouvé" : "Element "+researchedValue+" non trouvé"));
-        System.out.println(Colors.YELLOW_BOLD+"---------------------------------------"+ Colors.RESET);
+        System.out.println((research(researchedValue) ? "Element " +researchedValue+" trouvé" : "Element "+researchedValue+" non trouvé")+ Colors.RESET);
     }
 }

@@ -6,13 +6,13 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class BloomFilterBenchmark {
-    private BloomFilterArray arrayFilter;
-    private BloomFilterArrayList arrayListFilter;
-    private BloomFilterLinkedList linkedListFilter;
+    public BloomFilterArray arrayFilter;
+    public BloomFilterArrayList arrayListFilter;
+    public BloomFilterLinkedList linkedListFilter;
 
     private int bound;
     
-    private static int NB_SIMULATIONS = 10000000;
+    public static int NB_SIMULATIONS = 10000000;
     
     private int numberOfValues;
 
@@ -29,17 +29,33 @@ public class BloomFilterBenchmark {
         long startTime, endTime;
         Random random = new Random();
 
-        System.out.println("n = Number of values (1%, 5% and 10% of m)\n");
-        System.out.println("k = number of hash functions (1, 3 and 5)\n");
+        System.out.println("---------------------------------------------------");
+        System.out.println("\nFULL BENCHMARK\n");
+        System.out.println("Properties:");
+        System.out.println("    - m = "+this.arrayFilter.m + " (Size of the filter)");
+        System.out.println("    - k = "+this.arrayFilter.k + " (Number of hash functions)");
+        System.out.println("    - n = "+(int)(NB_SIMULATIONS*0.1) + " (Number of values added in the filter)");
+        System.out.println("    - "+NB_SIMULATIONS+" searching simulations (random values from 0 - "+this.bound+")\n");
+        System.out.println("Testing execution times: ");
+        
         // Test adding elements to the Bloom filter.
-        displayBenchmark(arrayFilter);
+        startTime = System.currentTimeMillis();
+        arrayFilter.initArrayOfValues((int)(NB_SIMULATIONS*0.1), bound, arrayFilter.k);
+        endTime = System.currentTimeMillis();
+        System.out.println("Array filter fill values: " + (endTime - startTime) + "ms");
 
         startTime = System.currentTimeMillis();
-        linkedListFilter.initArrayOfValues(numberOfValues, bound, arrayFilter.k);
+        arrayListFilter.initArrayOfValues((int)(NB_SIMULATIONS*0.1), bound, arrayFilter.k);
+        endTime = System.currentTimeMillis();
+        System.out.println("ArrayList filter fill values: " + (endTime - startTime) + "ms");
+        
+        startTime = System.currentTimeMillis();
+        linkedListFilter.initArrayOfValues((int)(NB_SIMULATIONS*0.1), bound, arrayFilter.k);
         endTime = System.currentTimeMillis();
         System.out.println("LinkedList filter fill values: " + (endTime - startTime) + "ms");
 
-        // Test testing elements in the Bloom filter.
+        System.out.println("\nTesting research times: ");
+        // Test searching elements in the Bloom filter.
         startTime = System.currentTimeMillis();
         for (int i = 0; i < NB_SIMULATIONS; i++) {
             arrayFilter.research(random.nextInt(bound));
@@ -72,7 +88,7 @@ public class BloomFilterBenchmark {
         double[] nValues = {0.01,0.05,0.1};
         int[] kValues = {1,3,5};
         
-        System.out.println(Colors.YELLOW_BOLD+"---------------------------------------");
+        System.out.println(Colors.YELLOW_BOLD+"\n---------------------------------------------------");
         System.out.println("\nBenchmark " + Colors.RESET + filter.getClass().getName()+"\n");
         System.out.println("Result of researching values in the filter :");
         System.out.println("m = " + filter.m);
@@ -92,12 +108,11 @@ public class BloomFilterBenchmark {
         
         startTotalTime = System.currentTimeMillis();
         filter.initArrayOfValues(numberOfValues, bound, filter.k);
-        System.out.println("\nNumber of values: " + numberOfValues);
+        System.out.println("\nNumber of values: " + filter.m*nValues[0] + ", " + filter.m*nValues[1] + ", " + filter.m*nValues[2]);
         System.out.println("Values: 0 - " + bound);
         
         endTotalTime = System.currentTimeMillis();
-        System.out.println("Total Time: " + (endTotalTime - startTotalTime) + "ms");
-        System.out.println(Colors.YELLOW_BOLD+"---------------------------------------"+ Colors.RESET);
+        System.out.println("Total Time: " + (endTotalTime - startTotalTime) + "ms"+ Colors.RESET);
     }
     
     public double falsePositiveRatio(int[] researchValues, BloomFilter filter) {
