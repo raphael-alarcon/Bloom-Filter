@@ -28,14 +28,18 @@ dans le tableau (donc entre 0 et m-1). »</i>
 - [x] ArrayList
 - [x] LinkedList
 
+#### Benchmarking (Banc d'essai)
+- [x] Banc d'essai temps d'execution
+- [x] Banc d'essai taux de faux positif
+- [ ] Analyse des résultats
+
+#### Autres
+- [ ] Documentation
+- [ ] Nettoyage et optimisation
+- [ ] Dernières vérifications
+
 ### Statut global
-
-![](https://geps.dev/progress/10)
-
-
-#### Example:
-
-This project is currently in development. Users can filter tweets by username and keyword and see visual data representation. Functionality to sort by additional parameters is in progress.
+![](https://geps.dev/progress/60)
 
 ## Project Screen Shot(s)
 
