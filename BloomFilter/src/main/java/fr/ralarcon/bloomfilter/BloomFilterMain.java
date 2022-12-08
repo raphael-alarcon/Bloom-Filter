@@ -29,17 +29,12 @@ public class BloomFilterMain {
         System.out.println("[4] Run benchmark on all three types of data structures ("+BloomFilterBenchmark.NB_SIMULATIONS+" simulations)");
         System.out.println("[5] Run detailled benchmark on a data structure");
         System.out.println("[6] Exit.");
-        try {
-            int answer = Integer.parseInt(scanner.nextLine());
-            if (!(answer >= 0 && answer <=6)) {
-                menu();
-                return;
-            }
-            runChoice(answer);
-        } catch (Exception e) {
-            System.out.println("Error: Not a number, please make of choice from 1―5.");
+        int answer = Integer.parseInt(scanner.nextLine());
+        if (!(answer >= 0 && answer <=6)) {
             menu();
+            return;
         }
+        runChoice(answer);
     }
     
     public static void runChoice(int answer) {

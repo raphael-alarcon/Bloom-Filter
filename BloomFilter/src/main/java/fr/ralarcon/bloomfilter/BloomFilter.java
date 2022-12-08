@@ -17,7 +17,7 @@ public abstract class BloomFilter {
     
     public int k;
     
-    public boolean[] bitsArray;
+    private boolean[] bitsArray;
     
     int[] valuesArray;
     
@@ -28,42 +28,27 @@ public abstract class BloomFilter {
     public BloomFilter(int size, int hashNumber) {
         this.m = size;
         this.k = hashNumber;
-        bitsArray = new boolean[m];
-        valuesArray = initArrayOfValues((int)(m*0.1), 200, k);
-    }
-    
-    public int[] initArrayOfValues(int size, int bound, int k) {
-        int[] res = new int[size];
-        for (int i = 0; i < size; i++) {
-            res[i] = rdm.nextInt(bound);
-            hashValue(k, res[i]);
-        }
-        return res;
     }
     
     public int hash(Object x, int i) {
         return x.hashCode() * i * 31 % m;
     }
+    
+    public int[] initArrayOfValues(int size, int bound, int k) {
+        return new int[size];
+    }
 
     public void hashValue(int k, int x) {
-        for (int i = 1; i <= k; i++) {
-            bitsArray[hash(x, i)] = true;
-        }
     }
 
     public boolean research(int x) {
-        for (int i = 1; i <= k; i++) {
-            if (!bitsArray[hash(x, i)])return false;
-        }
-        return true;
+        return false;
     }
+        
 
     public void displayResult() {
         System.out.println(Colors.YELLOW_BOLD+"\n―――――――――――――――――――――――――――――――――――――――――――――――――――");
-        System.out.println("\nDEBUG " + Colors.RESET + getClass().getName().toString()+"\n");
-
+        System.out.println("\nDEBUG " + Colors.RESET + getClass().getName()+"\n");
         System.out.println(Arrays.toString(valuesArray));
-        System.out.println(Arrays.toString(bitsArray));
-        System.out.println((research(researchedValue) ? "Element " +researchedValue+" trouvé" : "Element "+researchedValue+" non trouvé")+ Colors.RESET);
     }
 }

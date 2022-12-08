@@ -15,6 +15,8 @@
                 <exec.appArgs></exec.appArgs>
                 <exec.mainClass>fr.ralarcon.bloomfilter.BloomFilterMain</exec.mainClass>
                 <exec.executable>java</exec.executable>
+                <Env.MAVEN_OPTS>-Djansi.passthrough=true -Dorg.slf4j.simpleLogger.log.org.netbeans.modules.maven.event=off</Env.MAVEN_OPTS>
+                
             </properties>
         </action>
         <action>
@@ -50,6 +52,19 @@
                 <exec.mainClass>fr.ralarcon.bloomfilter.BloomFilterMain</exec.mainClass>
                 <exec.executable>java</exec.executable>
                 <exec.appArgs></exec.appArgs>
+            </properties>
+        </action>
+        <action>
+            <actionName>build-with-dependencies</actionName>
+            <reactor>also-make</reactor>
+            <packagings>
+                <packaging>*</packaging>
+            </packagings>
+            <goals>
+                <goal>install</goal>
+            </goals>
+            <properties>
+                <MAVEN_OPTS>-Djansi.passthrough=true -Dorg.slf4j.simpleLogger.log.org.netbeans.modules.maven.event=off</MAVEN_OPTS>
             </properties>
         </action>
     </actions>
