@@ -15,7 +15,7 @@
                 <exec.appArgs></exec.appArgs>
                 <exec.mainClass>fr.ralarcon.bloomfilter.BloomFilterMain</exec.mainClass>
                 <exec.executable>java</exec.executable>
-                <Env.MAVEN_OPTS>-Djansi.passthrough=true -Dorg.slf4j.simpleLogger.log.org.netbeans.modules.maven.event=off</Env.MAVEN_OPTS>
+                <Env.MAVEN_OPTS>-Djansi.passthrough=true</Env.MAVEN_OPTS>
                 
             </properties>
         </action>

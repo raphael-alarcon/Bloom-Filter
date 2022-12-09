@@ -85,6 +85,6 @@ public abstract class Colors {
     public static final String CROSSED_TEXT = "\033[9m";  // CROSSED
 
     public static void printSeparator() {
-       System.out.println(Colors.CROSSED_TEXT+"                                                        "+Colors.RESET);
+       System.out.println("------------------------------------------------------------------");
     }
 }

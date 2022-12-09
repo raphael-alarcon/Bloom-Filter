@@ -93,11 +93,11 @@ public class BloomFilterBenchmark {
                 filter.valuesArray = filter.initArrayOfValues((int) (filter.m * nValue), bound, kValue);
                 line.append(String.format("%5s|", StringUtils.center(falsePositiveRatio(filter) + "%", 5)));
             }
-            System.out.println(Colors.CROSSED_TEXT + "     +     +     +     +" + Colors.RESET);
+            System.out.println("-----+-----+-----+-----+");
             System.out.println(line);
             line = new StringBuilder();
         }
-        System.out.println(Colors.CROSSED_TEXT+"     +     +     +     +"+Colors.RESET);
+        System.out.println("-----+-----+-----+-----+");
         endTotalTime = System.currentTimeMillis();
         System.out.println("\nNumber of values: " + filter.m*nValues[0] + ", " + filter.m*nValues[1] + ", " + filter.m*nValues[2]);
         System.out.println("Values: 0 - " + bound);
