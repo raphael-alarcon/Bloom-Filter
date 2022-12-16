@@ -34,7 +34,7 @@ dans le tableau (donc entre 0 et m-1). »</i>
 #### Benchmarking (Banc d'essai)
 - [x] Banc d'essai temps d'execution
 - [x] Banc d'essai taux de faux positif
-- [ ] Analyse des résultats
+- [x] Analyse des résultats
 
 #### Autres
 - [ ] Documentation
@@ -78,10 +78,32 @@ Ici, on cherchera donc à tester le ratio de faux positif dans un filtre de tail
 - *n* ⇨ Nombre de valeurs ajoutées au filtre (en fonction de *m*, si *m* = 500 et *n* = 0.1, 500 x 0.1 = 50)
 - *k* ⇨ Nombre de fonctions de hash
 
-Voici un graphique représentant ce taux de faux positifs (avec m = 300) :
-![](../Bloom-Filter/resources/Taux%20de%20faux%20positif.png)
+Résultats d'une simulation dans le programme avec *m* = 300 :
+![](resources/screenshot1.png)
+
+Voici un graphique représentant ce même taux de faux positifs (avec m = 300), valeurs moyennes sur 10 itérations :
+![](resources/Taux%20de%20faux%20positif.png)
 Ici, *n* est respectivement égal à 1%, 5% et 10%. On ajoute donc 3, 15 et 30 valeurs dans le filtre. 
 
-On remarque que plus on à de fonctions de hash (*k tend vers +∞*), plus le taux de faux positif est élevé, mais également que plus on ajoute de valeurs dans le filtre, plus ce même taux augmente. 
+On remarque que plus on a de fonctions de hash (*k tend vers +∞*), plus le taux de faux positif est élevé, mais également que plus on ajoute de valeurs dans le filtre, plus ce même taux augmente. 
+
 ## Conclusion
+
+### Temps d'exécution
+
+On remarque que la LinkedList est la structure de données la plus lente, suivie de l'ArrayList et enfin du simple tableau. Cela est dû au fait que la LinkedList est une structure de données chaînée, ce qui implique que pour accéder à un élément, il faut parcourir la liste jusqu'à l'élément souhaité.
+
+### Taux de faux positif
+
+On remarque que plus on a de fonctions de hash, plus le taux de faux positif est élevé. Cela est dû au fait que plus on a de fonctions de hash, plus on a de chances de tomber sur un indice déjà occupé par une autre valeur. Le nombre de valeurs ajoutées dans le filtre a également un impact sur le taux de faux positif, plus on en ajoute, plus le taux augmente.
+
+### Conclusion générale
+
+On peut donc conclure que le simple tableau est la structure de données la plus efficace pour implémenter un filtre de Bloom. Cependant, il faut prendre en compte le fait que le simple tableau est une structure de données statique, ce qui implique qu'il faut connaître à l'avance la taille du filtre. Si on ne connaît pas cette taille, il est préférable d'utiliser une ArrayList ou une LinkedList.
+
+## Sources
+
+- [Wikipedia](https://fr.wikipedia.org/wiki/Filtre_de_Bloom)
+- [GeeksforGeeks](https://www.geeksforgeeks.org/bloom-filters-introduction-and-python-implementation/)
+- [StackOverflow](https://stackoverflow.com/questions/10696223/recommended-way-to-implement-a-bloom-filter)
 
