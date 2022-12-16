@@ -91,7 +91,7 @@ public class BloomFilterBenchmark {
             line.append(String.format("%5s|", StringUtils.center("" + kValue, 5)));
             for (double nValue : nValues) {
                 filter.valuesArray = filter.initArrayOfValues((int) (filter.m * nValue), bound, kValue);
-                line.append(String.format("%5s|", StringUtils.center(falsePositiveRatio(filter) + "%", 5)));
+                line.append(String.format("%4.1f%%|", falsePositiveRatio(filter)));
             }
             System.out.println("-----+-----+-----+-----+");
             System.out.println(line);
@@ -107,7 +107,7 @@ public class BloomFilterBenchmark {
     public double falsePositiveRatio(BloomFilter filter) {
         double result = 0;
         Random random = new Random();
-        int[] researchedValues = new int[100];
+        int[] researchedValues = new int[550];
         
         // Add random values to the list of researched values
         // (that are not actually in the valuesArray of the filter)
@@ -126,6 +126,6 @@ public class BloomFilterBenchmark {
                 result++;
             }
         }
-        return result/researchedValues.length;
+        return result/researchedValues.length*100;
     }
 }

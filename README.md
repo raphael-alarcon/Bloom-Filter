@@ -63,7 +63,7 @@ Ici, on compare les temps d'exécution d'un nombre fixé de recherches (valeur a
 
 ### Taux de faux positif
 
-Le taux de faux positif correspond au nombre de fois où une valeur non présente dans le filtre (qui n'a pas été ajoutée) est retournée présente. 
+Le taux de faux positif correspond au nombre de fois où une valeur non présente dans le filtre (qui n'a pas été ajoutée) est retournée présente.
 
 <hr>
 
@@ -78,12 +78,10 @@ Ici, on cherchera donc à tester le ratio de faux positif dans un filtre de tail
 - *n* ⇨ Nombre de valeurs ajoutées au filtre (en fonction de *m*, si *m* = 500 et *n* = 0.1, 500 x 0.1 = 50)
 - *k* ⇨ Nombre de fonctions de hash
 
-## Conclusion 
+Voici un graphique représentant ce taux de faux positifs (avec m = 300) :
+![](../Bloom-Filter/resources/Taux%20de%20faux%20positif.png)
+Ici, *n* est respectivement égal à 1%, 5% et 10%. On ajoute donc 3, 15 et 30 valeurs dans le filtre. 
 
-This was a 3 week long project built during my third module at Turing School of Software and Design. Project goals included using technologies learned up until this point and familiarizing myself with documentation for new features.  
+On remarque que plus on à de fonctions de hash (*k tend vers +∞*), plus le taux de faux positif est élevé, mais également que plus on ajoute de valeurs dans le filtre, plus ce même taux augmente. 
+## Conclusion
 
-Originally I wanted to build an application that allowed users to pull data from the Twitter API based on what they were interested in, such as 'most tagged users'. I started this process by using the `create-react-app` boilerplate, then adding `react-router-4.0` and `redux`.  
-
-One of the main challenges I ran into was Authentication. This lead me to spend a few days on a research spike into OAuth, Auth0, and two-factor authentication using Firebase or other third parties. Due to project time constraints, I had to table authentication and focus more on data visualization from parts of the API that weren't restricted to authenticated users.
-
-At the end of the day, the technologies implemented in this project are React, React-Router 4.0, Redux, LoDash, D3, and a significant amount of VanillaJS, JSX, and CSS. I chose to use the `create-react-app` boilerplate to minimize initial setup and invest more time in diving into weird technological rabbit holes. In the next iteration I plan on handrolling a `webpack.config.js` file to more fully understand the build process.
