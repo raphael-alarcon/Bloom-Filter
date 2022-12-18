@@ -11,8 +11,17 @@ public class BloomFilterBenchmark {
     public BloomFilterLinkedList linkedListFilter;
 
     private final int bound;
+
+    // Number of researches needed to evaluate the filter
     public static int NB_SIMULATIONS = 10000000;
 
+    /**
+     * Constructor (Init the filters)
+     *
+     * @param m size of the array
+     * @param k number of hash functions
+     * @param bound bound of the random values
+     */
     public BloomFilterBenchmark(int m, int k, int bound) {
         arrayFilter = new BloomFilterArray(m, k);
         arrayListFilter = new BloomFilterArrayList(m, k);
@@ -21,6 +30,10 @@ public class BloomFilterBenchmark {
         
     }
 
+    /**
+     * Run the benchmark on all three types of data structures (NB_SIMULATIONS simulations)
+     * and print the results in the console (in ms)
+     */
     public void run() {
         long startTime, endTime;
         Random random = new Random();
@@ -34,7 +47,7 @@ public class BloomFilterBenchmark {
         System.out.println("    - "+NB_SIMULATIONS+" searching simulations (random values from 0 - "+this.bound+")\n");
         System.out.println("Testing execution times: ");
         
-        // Test adding elements to the Bloom filter.
+        // Test when adding elements to the Bloom filter.
         startTime = System.currentTimeMillis();
         arrayFilter.initArrayOfValues((int)(NB_SIMULATIONS*0.1), bound, arrayFilter.k);
         endTime = System.currentTimeMillis();
@@ -51,7 +64,7 @@ public class BloomFilterBenchmark {
         System.out.println("LinkedList filter fill values: " + (endTime - startTime) + "ms");
 
         System.out.println("\nTesting research times: ");
-        // Test searching elements in the Bloom filter.
+        // Test when searching elements in the Bloom filter.
         startTime = System.currentTimeMillis();
         for (int i = 0; i < NB_SIMULATIONS; i++) {
             arrayFilter.research(random.nextInt(bound));
@@ -73,7 +86,13 @@ public class BloomFilterBenchmark {
         endTime = System.currentTimeMillis();
         System.out.println("LinkedList filter research: " + (endTime - startTime) + "ms");
     }
-    
+
+    /**
+     * Run the benchmark on the given data structure (with false positive rate)
+     * and print the results in the console
+     *
+     * @param filter the filter to test
+     */
     public void displayBenchmark(BloomFilter filter) {
         long startTotalTime, endTotalTime;
         
@@ -85,6 +104,7 @@ public class BloomFilterBenchmark {
         System.out.println(Colors.YELLOW_BOLD+"\nBENCHMARK " + Colors.RESET + filter.getClass().getName()+"\n");
         System.out.println("Result of researching values in the filter :");
         System.out.println("m = " + filter.m+"\n");
+        System.out.println("False positive rate:\n");
         System.out.printf("%5s|%5s|%5s|%5s|%n", StringUtils.center("k/n",5), StringUtils.center(""+nValues[0], 5), StringUtils.center(""+nValues[1], 5), StringUtils.center(""+nValues[2], 5));
         StringBuilder line = new StringBuilder();
         for (int kValue : kValues) {
@@ -103,10 +123,18 @@ public class BloomFilterBenchmark {
         System.out.println("Values: 0 - " + bound);
         System.out.println("Total Time: " + (endTotalTime - startTotalTime) + "ms"+ Colors.RESET);
     }
-    
+
+    /**
+     * Calculate the false positive rate of the given filter
+     *
+     * @param filter the filter to test
+     * @return the false positive rate
+     */
     public double falsePositiveRatio(BloomFilter filter) {
         double result = 0;
         Random random = new Random();
+
+        // Define here the number of values to research in the filter
         int[] researchedValues = new int[550];
         
         // Add random values to the list of researched values
@@ -120,7 +148,7 @@ public class BloomFilterBenchmark {
             researchedValues[i]=random.nextInt(value);
         }
         
-        //
+        // Research the values in the filter
         for (int researchedValue : researchedValues) {
             if (filter.research(researchedValue)) {
                 result++;

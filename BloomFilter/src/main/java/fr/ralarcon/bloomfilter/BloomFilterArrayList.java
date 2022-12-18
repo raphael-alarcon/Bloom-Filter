@@ -16,15 +16,29 @@ import java.util.Collections;
  */
 public class BloomFilterArrayList extends BloomFilter {
 
+    // Bits array is an ArrayList
     public ArrayList<Boolean> bitsArray;
-    
+
+    /**
+     * Constructor
+     * @param size size of the array
+     * @param hashNumber number of hash functions
+     */
     public BloomFilterArrayList(int size, int hashNumber) {
         super(size, hashNumber);
         bitsArray = new ArrayList<>(Arrays.asList(new Boolean[m]));
         valuesArray = initArrayOfValues(m, 500, k);
         Collections.fill(bitsArray, false);
     }
-    
+
+    /**
+     * Initialize the array of values
+     *
+     * @param size size of the array
+     * @param bound bound of the random values
+     * @param k number of hash functions
+     * @return the array of initialized values
+     */
     @Override
     public int[] initArrayOfValues(int size, int bound, int k) {
         int[] res = new int[size];
@@ -35,6 +49,12 @@ public class BloomFilterArrayList extends BloomFilter {
         return res;
     }
 
+    /**
+     * Hash the value
+     *
+     * @param k number of hash functions
+     * @param x value to hash
+     */
     @Override
     public void hashValue(int k, int x) {
         for (int i = 1; i <= k; i++) {
@@ -50,7 +70,9 @@ public class BloomFilterArrayList extends BloomFilter {
         return true;
     }
     
-    
+    /**
+     * Print the result of the research
+     */
     @Override
     public void displayResult() {
         super.displayResult();

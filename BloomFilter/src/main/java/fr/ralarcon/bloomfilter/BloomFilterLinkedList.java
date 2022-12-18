@@ -16,15 +16,29 @@ import java.util.LinkedList;
  */
 public class BloomFilterLinkedList extends BloomFilter {
 
+    // Bits array is a LinkedList
     public LinkedList<Boolean> bitsArray;
-    
+
+    /**
+     * Constructor
+     * @param size size of the array
+     * @param hashNumber number of hash functions
+     */
     public BloomFilterLinkedList(int size, int hashNumber) {
         super(size, hashNumber);
         bitsArray = new LinkedList<>(Arrays.asList(new Boolean[m]));
         valuesArray = initArrayOfValues(m, 500, k);
         Collections.fill(bitsArray, false);
     }
-    
+
+    /**
+     * Initialize the array of values
+     *
+     * @param size size of the array
+     * @param bound bound of the random values
+     * @param k number of hash functions
+     * @return the array of initialized values
+     */
     @Override
     public int[] initArrayOfValues(int size, int bound, int k) {
         int[] res = new int[size];
@@ -35,6 +49,12 @@ public class BloomFilterLinkedList extends BloomFilter {
         return res;
     }
 
+    /**
+     * Hash the value
+     *
+     * @param k number of hash functions
+     * @param x value to hash
+     */
     @Override
     public void hashValue(int k, int x) {
         for (int i = 1; i <= k; i++) {
@@ -42,6 +62,12 @@ public class BloomFilterLinkedList extends BloomFilter {
         }
     }
 
+    /**
+     * Research the value
+     *
+     * @param x value to research
+     * @return true if the element at the index of the researched value is true, false otherwise
+     */
     @Override
     public boolean research(int x) {
         for (int i = 1; i <= k; i++) {
@@ -49,7 +75,10 @@ public class BloomFilterLinkedList extends BloomFilter {
         }
         return true;
     }
-    
+
+    /**
+     * Display the result
+     */
     @Override
     public void displayResult() {
         super.displayResult();

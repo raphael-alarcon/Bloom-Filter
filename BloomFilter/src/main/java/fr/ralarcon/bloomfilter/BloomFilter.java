@@ -29,7 +29,15 @@ public abstract class BloomFilter {
         this.m = size;
         this.k = hashNumber;
     }
-    
+
+    /**
+     * Hash the value x with the hash function number i
+     *
+     * @param x value to hash
+     * @param i number of the hash function
+     *
+     * @return the hash value
+     */
     public int hash(Object x, int i) {
         return x.hashCode() * i * 31 % m;
     }

@@ -4,7 +4,9 @@
 - [Description](#filtre-de-bloom)
 - [Statut du projet](#statut-du-projet)
 - [Implémentation](#implmentation)
-- [Benchmark]()
+- [Benchmark](#benchmark)
+- [Conclusion](#conclusion)
+- [Sources](#sources)
 
 <br>
 
@@ -37,9 +39,9 @@ dans le tableau (donc entre 0 et m-1). »</i>
 - [x] Analyse des résultats
 
 #### Autres
-- [ ] Documentation
-- [ ] Nettoyage et optimisation
-- [ ] Dernières vérifications
+- [x] Documentation
+- [x] Nettoyage et optimisation
+- [x] Dernières vérifications
 
 ### Statut global
 ![](https://geps.dev/progress/80)
@@ -57,7 +59,7 @@ Le but final étant d'effectuer une comparaison des temps d'exécution entre les
 
 ### Temps d'exécution
 
-Ici, on compare les temps d'exécution d'un nombre fixé de recherches (valeur aléatoire) dans le filtre pour chacune trois structures de données *(On négligera pour le moment les résultats de ces recherches)*.
+Ici, on compare les temps d'exécution d'un nombre fixé de recherches (valeurs aléatoires) dans le filtre pour chacune des trois structures de données *(On négligera pour le moment les résultats de ces recherches)*.
 
 ![](resources/Comparaison%20tps%20d'éxec..png)
 
@@ -91,7 +93,7 @@ On remarque que plus on a de fonctions de hash (*k tend vers +∞*), plus le tau
 
 ### Temps d'exécution
 
-On remarque que la LinkedList est la structure de données la plus lente, suivie de l'ArrayList et enfin du simple tableau. Cela est dû au fait que la LinkedList est une structure de données chaînée, ce qui implique que pour accéder à un élément, il faut parcourir la liste jusqu'à l'élément souhaité.
+On remarque que la LinkedList est la structure de données dont le parcours est le plus lent, suivie de l'ArrayList et enfin du simple tableau. Cela est dû au fait que la LinkedList est une structure de données chaînée, ce qui implique que pour accéder à un élément, il faut parcourir la liste jusqu'à l'élément souhaité en partant de la première adresse.
 
 ### Taux de faux positif
 

@@ -13,16 +13,30 @@ import java.util.Arrays;
  * @author ralarcon
  */
 public class BloomFilterArray extends BloomFilter {
-    
+
+    // Bits array is an array
     private final boolean[] bitsArray;
-    
+
+    /**
+     * Constructor
+     * @param size size of the array
+     * @param hashNumber number of hash functions
+     */
     public BloomFilterArray(int size, int hashNumber) {
         super(size, hashNumber);
         bitsArray = new boolean[this.m];
         valuesArray = initArrayOfValues(m, 500, k);
         Arrays.fill(bitsArray, false);
     }
-        
+
+    /**
+     * Initialize the array of values
+     *
+     * @param size size of the array
+     * @param bound bound of the random values
+     * @param k number of hash functions
+     * @return the array of initialized values
+     */
     @Override
     public int[] initArrayOfValues(int size, int bound, int k) {
         int[] res = new int[size];
@@ -33,6 +47,12 @@ public class BloomFilterArray extends BloomFilter {
         return res;
     }
 
+    /**
+     * Hash the value
+     *
+     * @param k number of hash functions
+     * @param x value to hash
+     */
     @Override
     public void hashValue(int k, int x) {
         for (int i = 1; i <= k; i++) {
@@ -40,6 +60,12 @@ public class BloomFilterArray extends BloomFilter {
         }
     }
 
+    /**
+     * Check if the value is in the array
+     *
+     * @param x value to check
+     * @return true if the value is in the array, false otherwise
+     */
     @Override
     public boolean research(int x) {
         for (int i = 1; i <= k; i++) {
@@ -48,6 +74,9 @@ public class BloomFilterArray extends BloomFilter {
         return true;
     }
 
+    /**
+     * Print the result of the research
+     */
     @Override
     public void displayResult() {
         super.displayResult();

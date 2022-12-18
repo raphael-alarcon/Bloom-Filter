@@ -15,13 +15,17 @@ import java.util.Scanner;
 public class BloomFilterMain {
   
     static Scanner scanner =  new Scanner(System.in);
-    
+
+    // Set the parameters of the benchmark here : (m, k, bound of the random values)
     static BloomFilterBenchmark benchmark = new BloomFilterBenchmark(300, 3, 1000000);
     
     public static void main(String[] args) {
         menu();
     }
-    
+
+    /**
+     * Menu principal de l'application
+     */
     public static void menu() {
         Colors.printSeparator();
         System.out.println("\nBloom Filter implementation by ALARCON Raphaël\n");
@@ -31,10 +35,12 @@ public class BloomFilterMain {
         System.out.println("[4] Run benchmark on all three types of data structures ("+BloomFilterBenchmark.NB_SIMULATIONS+" simulations)");
         System.out.println("[5] Run detailled benchmark on a data structure");
         System.out.println("[6] Exit.");
+
+        // If the user enters a non-integer value, the program will send an error message and ask for a new input
         int answer;
         try {
             answer = Integer.parseInt(scanner.nextLine());
-            if (!(answer >= 0 && answer <=6)) {
+            if (!(answer > 0 && answer <=6)) {
                 menu();
                 return;
             }
@@ -44,7 +50,12 @@ public class BloomFilterMain {
             menu();
         }
     }
-    
+
+    /**
+     * Run the user's choice from the menu
+     *
+     * @param answer The user's choice in form of an integer (1 - 6)
+     */
     public static void runChoice(int answer) {
         BloomFilter filter;
         switch (answer) {
@@ -64,6 +75,7 @@ public class BloomFilterMain {
                 benchmark.run(); // Run the benchmark with m = 300, k = 3 and values going from 0 ― 1000000
                 break;
             case 5:
+                // Ask user for the type of data structure to use for the benchmark
                 System.out.println("Enter the type of structure you want to use (\"LinkedList\", \"SimpleArray\" or \"ArrayList\"):");
                 String choice = scanner.nextLine();
                 switch (choice) {
